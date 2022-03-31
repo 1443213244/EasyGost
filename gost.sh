@@ -65,7 +65,7 @@ function check_root()
 }
 function check_new_ver()
 {
-    ct_new_ver=$(wget --no-check-certificate -qO- -t2 -T3 https://api.github.com/repos/ginuerzh/gost/releases/latest| grep "tag_name"| head -n 1| awk -F ":" '{print $2}'| sed 's/\"//g;s/,//g;s/ //g;s/v//g')
+    ct_new_ver=$(wget --no-check-certificate -qO- -t2 -T3 https://api.github.com/repos/1443213244/gost/releases/latest| grep "tag_name"| head -n 1| awk -F ":" '{print $2}'| sed 's/\"//g;s/,//g;s/ //g;s/v//g')
     if [[ -z ${ct_new_ver} ]]; then
         ct_new_ver="2.11.1"
         echo -e "${Error} gost 最新版本获取失败，正在下载v${ct_new_ver}版"
@@ -100,13 +100,13 @@ function Install_ct()
     check_sys
     check_new_ver
     `rm -rf gost-linux-"$bit"-"$ct_new_ver".gz`
-    `wget --no-check-certificate https://github.com/ginuerzh/gost/releases/download/v"$ct_new_ver"/gost-linux-"$bit"-"$ct_new_ver".gz`
+    `wget --no-check-certificate https://github.com/1443213244/gost/releases/download/v"$ct_new_ver"/gost-linux-"$bit"-"$ct_new_ver".gz`
     `gunzip gost-linux-"$bit"-"$ct_new_ver".gz`
     `mv gost-linux-"$bit"-"$ct_new_ver" gost`
     `mv gost /usr/bin/gost`
     `chmod -R 777 /usr/bin/gost`
-    `wget --no-check-certificate https://raw.githubusercontent.com/xxhjkl/EasyGost/master/gost.service && chmod -R 777 gost.service && mv gost.service /usr/lib/systemd/system`
-    `mkdir /etc/gost && wget --no-check-certificate https://raw.githubusercontent.com/xxhjkl/EasyGost/master/config.json && mv config.json /etc/gost && chmod -R 777 /etc/gost`
+    `wget --no-check-certificate https://raw.githubusercontent.com/1443213244/EasyGost/master/gost.service && chmod -R 777 gost.service && mv gost.service /usr/lib/systemd/system`
+    `mkdir /etc/gost && wget --no-check-certificate https://raw.githubusercontent.com/1334213244/EasyGost/master/config.json && mv config.json /etc/gost && chmod -R 777 /etc/gost`
     `systemctl enable gost && systemctl restart gost`
     echo "------------------------------"
     if test -a /usr/bin/gost -a /usr/lib/systemctl/gost.service -a /etc/gost/config.json;then
